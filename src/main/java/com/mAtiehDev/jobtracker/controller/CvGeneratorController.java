@@ -7,6 +7,7 @@ import com.mAtiehDev.jobtracker.service.CvGeneratorService;
 import com.mAtiehDev.jobtracker.service.JwtService;
 import lombok.RequiredArgsConstructor;
 
+import java.io.IOException;
 import java.util.Map;
 
 import org.apache.tika.exception.TikaException;
@@ -34,7 +35,7 @@ public class CvGeneratorController {
 
     @PostMapping("/export-pdf")
     public ResponseEntity<byte[]> exportPdf(@RequestBody Map<String, String> body,
-                                            @RequestHeader("Authorization") String authHeader) {
+                                            @RequestHeader("Authorization") String authHeader) throws IOException {
         String cvText = body.get("cvText");
         byte[] pdf = cvGeneratorService.exportCvToPdf(cvText);
         return ResponseEntity.ok()
